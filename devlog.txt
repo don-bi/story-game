@@ -2,5 +2,5 @@ donaldB -- 11-01-2022 19:00 : Worked on creating the site map diagrams
 wilsonM --  11-01-2022 19:00 : Worked on writing out the revised devlog
 nakibA -- 11-01-2022 19:00 : Linked submodule, registered team repo, helped come up with ideas for devlog
 wilsonM --  11-01-2022 13:00 : Made some changes from the feedback received in class (added sign up option so that users can create an account to log in)
-donaldB -- 11-02-2022 23:15 : Finished off the changes from the feedback received in class 
+donaldB -- 11-02-2022 23:15 : Finished off the changes from the feedback received in class by adding new html pages and fixing the site map and concept map
 nakibA -- 11-02-2022 23:15 : Brought the devlog, readme in compliance with instructions
