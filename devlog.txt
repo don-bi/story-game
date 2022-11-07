@@ -4,3 +4,6 @@ nakibA -- 11-01-2022 19:00 : Linked submodule, registered team repo, helped come
 wilsonM --  11-01-2022 13:00 : Made some changes from the feedback received in class (added sign up option so that users can create an account to log in)
 donaldB -- 11-02-2022 23:15 : Finished off the changes from the feedback received in class by adding new html pages and fixing the site map and concept map
 nakibA -- 11-02-2022 23:15 : Brought the devlog and readme in compliance with instructions
+wilsonM --  11-07-2022 14:00: Added files db.py and edit.py
+nakibA -- 11-07-2022 14:00: Prepared demo for our login feature
+donaldB -- 11-07-2022 14:00: wrote __init__.py 
