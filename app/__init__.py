@@ -11,4 +11,4 @@ def home():
         return render_template('discover.html',) # page with all the stories
     return render_template('index.html',) # welcome page, has login button
 
-@app.route('/login', methods=['POST'])
+@app.route('/') 
