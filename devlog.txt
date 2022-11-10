@@ -10,3 +10,4 @@ donaldB -- 11-07-2022 14:00: wrote __init__.py
 donaldB -- 11-08-2022 22:41: added html files with basic boilerplates and testing tags; added the routes in __init__.py
 nakibA -- 11-10-2022 00:21 added requirement file, flag.jpg, and design_wiki0.pdf
 donaldB -- 11-10-2022 00:24: created db.py for database functions; finished mechanisms of logging in and signin out. Both work with the database now.
+nakibA -- 11-10-2022 14:00: added launch codes to README.md
