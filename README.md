@@ -8,7 +8,9 @@ Description of Website:
 - A database that stores usernames and passwords
 - A database that stores all the stories
 
-Launch Codes (placeholder):
-- placeholder
-- placeholder
-- placeholder
+Launch Codes:
+
+    git clone git@github.com:nakibabedin/SoftDev_p00.git riceExplosion
+    cd riceExplosion
+    python3 app/__init__.py
+
