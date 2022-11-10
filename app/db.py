@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3, random as rand
 
 DB_FILE = "data.db"
 
@@ -15,7 +15,7 @@ def db_close():
     
 def db_table_inits(): #creates stories and user tables if they don't exist
     c = db_connect()
-    c.execute("CREATE TABLE IF NOT EXISTS stories (id int, part int, creator text, story text, contributor text)")
+    c.execute("CREATE TABLE IF NOT EXISTS stories (id int, title text, creator text)")
     c.execute("CREATE TABLE IF NOT EXISTS users (username text, password text)")
     db_close()
     
@@ -35,6 +35,8 @@ def check_user_not_exists(username): #checks if user doesn't exist, returns True
 def create_new_user(username, password): #creates new user
     c = db_connect()
     c.execute(f'INSERT INTO users VALUES ("{username}","{password}")')
+    c.execute("SELECT * from users")
+    print(len(c.fetchall()))
     db_close()
 
 
@@ -60,3 +62,50 @@ db_close()
 print(check_user_not_exists("troll))
 print(check_credentials("troll","troll123"))
 '''
+
+def create_story(creator, title, first_part):
+    c = db_connect()
+    c.execute("SELECT * FROM stories")
+    story_id = len(c.fetchall()) #the id of the new story
+
+    c.execute(f'INSERT INTO stories VALUES ("{story_id}", "{title}", "{creator}")') #stores a new story in the database
+    c.execute(f'CREATE TABLE story_{story_id} (story_part int, story text, contributor text)') #creates a new table for the story
+    c.execute(f'INSERT INTO story_{story_id} VALUES (0, "{first_part}", "{creator}")') #inserts creator's addition to the story's table
+    db_close()
+
+def add_to_story(contributor, story_id, story_addition):
+    c = db_connect()
+    c.execute(f'SELECT * from story_{story_id}')
+    story_part = len(c.fetchall())
+    #adds new addition
+    c.execute(f'INSERT INTO story_{story_id} VALUES ({story_part}, "{story_addition}", "{contributor}")')
+    db_close()
+
+'''
+db_table_inits()
+#create_story("troll", "trolltitle", "hello I am troll")
+add_to_story("trollno2", 0, "hello there I am troll 2")
+c = db_connect()
+c.execute("SELECT * FROM story_0")
+print(c.fetchall())
+db_close()
+'''
+
+def get_stories():
+    c = db_connect()
+    c.execute('SELECT * FROM stories')
+    stories = c.fetchall()
+    rand.shuffle(stories)
+    return stories
+
+def get_story_info(story_id):
+    c = db_connect()
+    c.execeute(f'SELECT * FROM story_{story_id}')
+    story_info = c.fetchall()
+    return story_info
+
+def get_contributor_list(story_id):
+    c = db_connect()
+    c.execute(f'SELECT contributor FROM story_{story_id}')
+    contributor_list = c.fetchall()
+    return contributor_list

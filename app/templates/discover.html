@@ -6,7 +6,18 @@
 <body>
     DISCOVER TEST
     <form>
-        <button formaction="logout">LOGOUT!</button>
+        <button formaction="/add">create a new story</button>
+        <button formaction="/logout">LOGOUT!</button>
+        <br>
+    </form>
+    <form action='/story' class="story-cards" method="POST">
+        {% for story in stories %}
+        <button type="submit" name="{{story[0]}}" class="card">
+            <div class="title">{{story[1]}}</div>
+            <div class="creator">{{story[2]}}</div>
+            <br>
+        </button>
+        {% endfor %}
     </form>
 </body>
 </html>

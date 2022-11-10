@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Discover</title>
+    <title>Story</title>
 </head>
 <body>
-    STORY
-    
-    INPUT
+    {% if username in contributor_list %}
+        <div class="story">
+        {% for info in story_info %}
+        <span>info[1]</span>
+        {% endfor %}    
+        </div>
+        
+    {% else %}
+        <!-- if user is not a contributor, only shows the last contribution of the story -->
+        <div class="story">{{story_info[len(story_info)-1][1]}}</div>
+        <form action="/contribution"></form> 
+    {% endif %}
+        <div class="creator">Created by {{story_info[0][2]}}</div>
+
 </body>
 </html>

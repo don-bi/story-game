@@ -28,26 +28,36 @@ def logout():
 @app.route('/discover', methods=["POST"])
 def discover(): 
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if ('login' in request.form): #based on submit button name="login" to check if it's login or signup
+        if 'username' in request.form: #makes sure that it's a login or signup assigning
+            username = request.form['username']
+            password = request.form['password']
+        print(request.form)
+        if 'login' in request.form: #based on submit button name="login" to check if it's login or signup
             correct_credentials = check_credentials(username, password)
             #sends user back to login page with an error if user credentials are wrong
             #sends them to discover page otherwise
             if correct_credentials: 
                 session['username'] = username
-                return render_template('discover.html')
+                return render_template('discover.html', stories = get_stories())
             else:
                 return render_template('login.html', error = True)
-        else: #for signups
+
+        elif 'signup' in request.form: #for signups
             no_user_exists = check_user_not_exists(username)
             if no_user_exists: #signs up and logs in the user
                 create_new_user(username, password)
                 session['username'] = username
-                return render_template('discover.html')
+                return render_template('discover.html', stories = get_stories())
             else: #error because user already exists
                 return render_template('signup.html', error = True)
-    
+
+        elif 'addition' in request.form:
+            title = request.form['title']
+            first_part = request.form['first_part']
+            creator = session['username']
+            create_story(creator, title, first_part)
+            return render_template('discover.html', stories = get_stories())
+
 @app.route('/add')
 def add():
     return render_template('add.html')
@@ -56,9 +66,12 @@ def add():
 def profile():
     return render_template('profile.html', username = session['username'])
     
-@app.route('/story')
+@app.route('/story', methods=["POST"])
 def story():
-    return render_template('story.html')
+    story_id = list(request.form)[0][0]
+    story_info = get_story_info(story_id)
+    contributor_list = get_contributor_list(story_id)
+    return render_template('story.html', story_info = story_info, contributor_list = contributor_list, username = session['username'])
     
 if __name__ == '__main__':
     app.debug = True
