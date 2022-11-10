@@ -33,6 +33,7 @@ def discover():
             password = request.form['password']
         print(request.form)
         if 'login' in request.form: #based on submit button name="login" to check if it's login or signup
+            db_table_inits() #makes tables if they don't exist
             correct_credentials = check_credentials(username, password)
             #sends user back to login page with an error if user credentials are wrong
             #sends them to discover page otherwise
@@ -43,6 +44,7 @@ def discover():
                 return render_template('login.html', error = True)
 
         elif 'signup' in request.form: #for signups
+            db_table_inits() #makes tables if they don't exist
             no_user_exists = check_user_not_exists(username)
             if no_user_exists: #signs up and logs in the user
                 create_new_user(username, password)
@@ -68,11 +70,18 @@ def profile():
     
 @app.route('/story', methods=["POST"])
 def story():
-    story_id = list(request.form)[0][0]
+    story_id = list(request.form)[0][0] #gets id from name="{{story[0]}}", turns into list becuase request.form is dictonary
+    if len(request.form) > 1: 
+        story_id = list(request.form)[-1][0] 
+        contribution = request.form['contribution']
+        add_to_story(session['username'], story_id, contribution)
     story_info = get_story_info(story_id)
     contributor_list = get_contributor_list(story_id)
-    return render_template('story.html', story_info = story_info, contributor_list = contributor_list, username = session['username'])
-    
+    newest_contribution = story_info[len(story_info)-1][1]
+    return render_template('story.html', story_id = story_id,
+    story_info = story_info, contributor_list = contributor_list, 
+    username = session['username'], newest_contribution = newest_contribution)
+
 if __name__ == '__main__':
     app.debug = True
     app.run()

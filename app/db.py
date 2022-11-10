@@ -100,7 +100,7 @@ def get_stories():
 
 def get_story_info(story_id):
     c = db_connect()
-    c.execeute(f'SELECT * FROM story_{story_id}')
+    c.execute(f'SELECT * FROM story_{story_id}')
     story_info = c.fetchall()
     return story_info
 
