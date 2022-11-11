@@ -27,6 +27,19 @@ def logout():
 
 @app.route('/discover', methods=["POST"])
 def discover(): 
+    if 'addition' in request.form:
+        title = request.form['title']
+        first_part = request.form['first_part']
+        creator = session['username']
+        create_story(creator, title, first_part)
+    return render_template('discover.html', stories = get_stories())
+
+@app.route('/add')
+def add():
+    return render_template('add.html')
+    
+@app.route('/profile', methods=['GET','POST'])
+def profile():
     if request.method == 'POST':
         if 'username' in request.form: #makes sure that it's a login or signup assigning
             username = request.form['username']
@@ -39,7 +52,6 @@ def discover():
             #sends them to discover page otherwise
             if correct_credentials: 
                 session['username'] = username
-                return render_template('discover.html', stories = get_stories())
             else:
                 return render_template('login.html', error = True)
 
@@ -49,23 +61,9 @@ def discover():
             if no_user_exists: #signs up and logs in the user
                 create_new_user(username, password)
                 session['username'] = username
-                return render_template('discover.html', stories = get_stories())
             else: #error because user already exists
                 return render_template('signup.html', error = True)
-
-        elif 'addition' in request.form:
-            title = request.form['title']
-            first_part = request.form['first_part']
-            creator = session['username']
-            create_story(creator, title, first_part)
-            return render_template('discover.html', stories = get_stories())
-
-@app.route('/add')
-def add():
-    return render_template('add.html')
     
-@app.route('/profile')
-def profile():
     username = session['username']
     created_stories = get_created_stories(username)
     contributed_stories = get_contributed_stories(username)
