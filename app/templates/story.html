@@ -4,26 +4,26 @@
     <title>Story</title>
 </head>
 <body>
-    <form action="/">
-        <button>home</button>
+    <form>
+        <button formaction="/">home</button>
+        <button formaction="/profile">profile</button>
     </form>
     {% if (username,) in contributor_list %} <!-- contributor_list is a list of tuples, makes username into a tuple first to check if user contributed already or not -->
-    I'm a contributor
         <div class="story">
         {% for info in story_info %}
-        <span>{{info[1]}}</span>
+        <span>{{info[2]}}</span> <!-- makes span tags for every contribution -->
         {% endfor %}    
         </div>
-        <div class="creator">Created by {{story_info[0][2]}}</div>
+        <div class="creator">Created by {{story_info[0][3]}}</div> <!-- gets username of creator -->
         
     {% else %}
         <!-- if user is not a contributor, only shows the last contribution of the story -->
         <div class="story">{{newest_contribution}}</div>
+        <div class="creator">Created by {{story_info[0][3]}}</div>
         <form action="/story" method="POST">
             <input type="text" name="contribution">
             <input type="submit" name="{{story_id}}" value="Submit Contribution">
         </form> 
-        <div class="creator">Created by {{story_info[0]}}</div>
     {% endif %}
     
     <!--

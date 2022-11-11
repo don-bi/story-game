@@ -4,9 +4,34 @@
     <title>Discover</title>
 </head>
 <body>
-    <form action="/">
-        <button>home</button>
+    <form>
+        <button formaction="/">home</button>
+        <button formaction="/profile">profile</button>
     </form>
-    PROFILE
+    WELCOME {{username}}
+    <div class="container">
+        <h1>Created Stories</h1>
+        <form action='/story' class="story-cards" method="POST">
+            {% for story in created_stories %}
+            <button type="submit" name="{{story[0]}}" class="card">
+                <div class="title">{{story[1]}}</div>
+                <div class="creator">{{story[2]}}</div>
+                <br>
+            </button>
+            {% endfor %}
+        </form>
+    </div>
+    <div class="container">
+        <h1>Contributed Stories</h1>
+        <form action='/story' class="story-cards" method="POST">
+            {% for story in contributed_stories %}
+            <button type="submit" name="{{story[0]}}" class="card">
+                <div class="title">{{story[1]}}</div>
+                <div class="creator">{{story[2]}}</div>
+                <br>
+            </button>
+            {% endfor %}
+        </form>
+    </div>
 </body>
 </html>

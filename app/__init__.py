@@ -66,7 +66,12 @@ def add():
     
 @app.route('/profile')
 def profile():
-    return render_template('profile.html', username = session['username'])
+    username = session['username']
+    created_stories = get_created_stories(username)
+    contributed_stories = get_contributed_stories(username)
+    print(contributed_stories)
+    return render_template('profile.html', 
+                           created_stories = created_stories, contributed_stories = contributed_stories, username = username)
     
 @app.route('/story', methods=["POST"])
 def story():
@@ -75,9 +80,11 @@ def story():
         story_id = list(request.form)[-1][0] 
         contribution = request.form['contribution']
         add_to_story(session['username'], story_id, contribution)
+        
     story_info = get_story_info(story_id)
     contributor_list = get_contributor_list(story_id)
-    newest_contribution = story_info[len(story_info)-1][1]
+    newest_contribution = story_info[-1][2]
+    #print(newest_contribution) #testing
     return render_template('story.html', story_id = story_id,
     story_info = story_info, contributor_list = contributor_list, 
     username = session['username'], newest_contribution = newest_contribution)
