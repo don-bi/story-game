@@ -75,10 +75,12 @@ def create_story(creator, title, first_part):
 
 def add_to_story(contributor, story_id, story_addition):
     c = db_connect()
-    c.execute('SELECT * FROM story_info WHERE id=?',story_id)
-    story_part = len(c.fetchall())
+    c.execute('SELECT contributor FROM story_info WHERE id=?',story_id)
+    contributors = c.fetchall()
+    story_part = len(contributors)
     #adds new addition to story_info
-    c.execute('INSERT INTO story_info VALUES (?, ?, ?, ?)',(story_id,story_part,story_addition,contributor))
+    if (contributor,) not in contributors: #makes sure you can't make another part if already a contributor
+        c.execute('INSERT INTO story_info VALUES (?, ?, ?, ?)',(story_id,story_part,story_addition,contributor))
     db_close()
 
 '''
