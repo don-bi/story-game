@@ -22,7 +22,7 @@ def db_table_inits(): #creates stories and user tables if they don't exist
 #for signing up
 def check_user_not_exists(username): #checks if user doesn't exist, returns True if they don't exist
     c = db_connect()
-    c.execute(f'SELECT username FROM users WHERE username="{username}"')
+    c.execute('SELECT username FROM users WHERE username=?',username)
     user = c.fetchone()
     db_close()
     print(user)
@@ -34,7 +34,7 @@ def check_user_not_exists(username): #checks if user doesn't exist, returns True
 #for signing up
 def create_new_user(username, password): #creates new user
     c = db_connect()
-    c.execute(f'INSERT INTO users VALUES ("{username}","{password}")')
+    c.execute('INSERT INTO users VALUES (?,?)',(username, password))
     c.execute("SELECT * from users")
     print(len(c.fetchall()))
     db_close()
@@ -43,7 +43,7 @@ def create_new_user(username, password): #creates new user
 #for logging in
 def check_credentials(username, password): #checks if there exists username and password in db, returns True if there is
     c = db_connect()
-    c.execute(f'SELECT username,password FROM users WHERE username="{username}" AND password="{password}"')
+    c.execute('SELECT username,password FROM users WHERE username=? AND password=?',(username, password))
     user = c.fetchone()
     db_close()
     if user:
@@ -68,17 +68,17 @@ def create_story(creator, title, first_part):
     c.execute("SELECT * FROM stories")
     story_id = len(c.fetchall()) #the id of the new story
 
-    c.execute(f'INSERT INTO stories VALUES ("{story_id}", "{title}", "{creator}")') #stores a new story in the database
-    c.execute(f'CREATE TABLE story_{story_id} (story_part int, story text, contributor text)') #creates a new table for the story
-    c.execute(f'INSERT INTO story_{story_id} VALUES (0, "{first_part}", "{creator}")') #inserts creator's addition to the story's table
+    c.execute('INSERT INTO stories VALUES (?, ?, ?)',(story_id,title,creator)) #stores a new story in the database
+    c.execute('CREATE TABLE story_? (story_part int, story text, contributor text)',story_id) #creates a new table for the story
+    c.execute('INSERT INTO story_? VALUES (0, ?, ?)',(story_id,first_part,creator)) #inserts creator's addition to the story's table
     db_close()
 
 def add_to_story(contributor, story_id, story_addition):
     c = db_connect()
-    c.execute(f'SELECT * from story_{story_id}')
+    c.execute('SELECT * from story_{story_id}')
     story_part = len(c.fetchall())
     #adds new addition
-    c.execute(f'INSERT INTO story_{story_id} VALUES ({story_part}, "{story_addition}", "{contributor}")')
+    c.execute('INSERT INTO story_{story_id} VALUES ({story_part}, "{story_addition}", "{contributor}")')
     db_close()
 
 '''

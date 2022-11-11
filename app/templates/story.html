@@ -4,11 +4,14 @@
     <title>Story</title>
 </head>
 <body>
-    {% if username in contributor_list %}
+    <form action="/">
+        <button>home</button>
+    </form>
+    {% if (username,) in contributor_list %} <!-- contributor_list is a list of tuples, makes username into a tuple first to check if user contributed already or not -->
     I'm a contributor
         <div class="story">
         {% for info in story_info %}
-        <span>info[1]</span>
+        <span>{{info[1]}}</span>
         {% endfor %}    
         </div>
         <div class="creator">Created by {{story_info[0][2]}}</div>
@@ -22,6 +25,10 @@
         </form> 
         <div class="creator">Created by {{story_info[0]}}</div>
     {% endif %}
-
+    
+    <!--
+    {{story_info}}
+    {{contributor_list}}
+    -->
 </body>
 </html>
