@@ -2,24 +2,38 @@
 <html lang="en">
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <form>
-        <button formaction="/">home</button>
+        <button class="home-button" formaction="/">home</button>
     </form>
-    <form action="/profile" method="POST">
-        Username:
-        <input type="text" name="username">
-        <br>
-        Password:
-        <input type="text" name="password">
-        <br>
-        <input type="submit" name="login">
-        <br>
-        {% if error %}
-        The wrong username or password was entered.
-        {% endif %}
-    </form>
+    <div class="container">
+        <div class="login-container">
+            <h1 class="login-header">Login</h1>
+            <div class="break"></div> <!-- Creates a break with flexbox -->
+                <form class="login-form" action="/profile" method="POST">
+                    Username:
+                    <div class="break"></div> 
+                    <input type="text" name="username" required>
+                    <div class="break"></div> 
+                    Password:
+                    <div class="break"></div> 
+                    <input type="text" name="password" required>
+                    <div class="break"></div> 
+                    <input type="submit" name="login">
+                    <div class="break"></div> 
+                    <div class="break"></div> 
+                    <div class="break"></div> 
+                    {% if error %}
+                    The wrong username or password was entered.
+                    {% endif %}
+                    <div class="break"></div> 
+                    Don't have an account?
+                </form>
+                <div class="break"></div> 
+                <button id="signup-login" formaction="/signup">Create an account</button>
+        </div>
+    </div>
 </body>
 </html>
