@@ -8,32 +8,22 @@
     <form>
         <button class="home-button" formaction="/">home</button>
     </form>
-    <div class="container">
-        <div class="login-container">
-            <h1 class="login-header">Login</h1>
-            <div class="break"></div> <!-- Creates a break with flexbox -->
-                <form class="login-form" action="/profile" method="POST">
-                    Username:
-                    <div class="break"></div> 
-                    <input type="text" name="username" required>
-                    <div class="break"></div> 
-                    Password:
-                    <div class="break"></div> 
-                    <input type="text" name="password" required>
-                    <div class="break"></div> 
-                    <input type="submit" name="login">
-                    <div class="break"></div> 
-                    <div class="break"></div> 
-                    <div class="break"></div> 
-                    {% if error %}
-                    The wrong username or password was entered.
-                    {% endif %}
-                    <div class="break"></div> 
-                    Don't have an account?
-                </form>
-                <div class="break"></div> 
-                <button id="signup-login" formaction="/signup">Create an account</button>
-        </div>
+    <div class="login-container">
+        <h1 class="login-header">Login</h1>
+        <form class="login-form" action="/profile" method="POST">
+            Username:
+            <input type="text" name="username" required>
+            Password:
+            <input type="text" name="password" required>
+            <input type="submit" name="login">
+            {% if error %}
+            The wrong username or password was entered.
+            {% endif %}
+        </form>
+        <form class="signup">
+            Don't have an account?
+            <button id="signup-login" formaction="/signup">Create an account</button>
+        </form>
     </div>
 </body>
 </html>
