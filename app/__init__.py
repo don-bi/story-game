@@ -26,7 +26,7 @@ def logout():
     return render_template('index.html')
 
 @app.route('/discover', methods=["POST"])
-def discover(): 
+def discover():
     if 'addition' in request.form:
         title = request.form['title']
         first_part = request.form['first_part']
@@ -37,7 +37,7 @@ def discover():
 @app.route('/add')
 def add():
     return render_template('add.html')
-    
+
 @app.route('/profile', methods=['GET','POST'])
 def profile():
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def profile():
             correct_credentials = check_credentials(username, password)
             #sends user back to login page with an error if user credentials are wrong
             #sends them to discover page otherwise
-            if correct_credentials: 
+            if correct_credentials:
                 session['username'] = username
             else:
                 return render_template('login.html', error = True)
@@ -63,28 +63,28 @@ def profile():
                 session['username'] = username
             else: #error because user already exists
                 return render_template('signup.html', error = True)
-    
+
     username = session['username']
     created_stories = get_created_stories(username)
     contributed_stories = get_contributed_stories(username)
     print(contributed_stories)
-    return render_template('profile.html', 
+    return render_template('profile.html',
                            created_stories = created_stories, contributed_stories = contributed_stories, username = username)
-    
+
 @app.route('/story', methods=["POST"])
 def story():
     story_id = list(request.form)[0][0] #gets id from name="{{story[0]}}", turns into list becuase request.form is dictonary
     if len(request.form) > 1: #request.form will only have more than one element when contribution request
-        story_id = list(request.form)[-1][0] 
+        story_id = list(request.form)[-1][0]
         contribution = request.form['contribution']
         add_to_story(session['username'], story_id, contribution)
-        
+
     story_info = get_story_info(story_id)
     contributor_list = get_contributor_list(story_id)
     newest_contribution = story_info[-1][2]
     #print(newest_contribution) #testing
     return render_template('story.html', story_id = story_id,
-    story_info = story_info, contributor_list = contributor_list, 
+    story_info = story_info, contributor_list = contributor_list,
     username = session['username'], newest_contribution = newest_contribution)
 
 if __name__ == '__main__':
