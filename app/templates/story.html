@@ -11,7 +11,7 @@
   </form>
   {% if (username,) in contributor_list %} <!-- contributor_list is a list of tuples, makes username into a tuple first to check if user contributed already or not -->
   <div class="story-story">
-    <h1> Story: {{story_title[0]}}</h1>
+    <h1> {{story_title[0]}}</h1>
     {% for info in story_info %}
     <span>
       {{info[2]}}
@@ -29,7 +29,7 @@
   {% else %}
   <!-- if user is not a contributor, only shows the last contribution of the story -->
   <div class="story-story">
-    <h1> Story: {{story_title[0]}} </h1>
+    <h1> {{story_title[0]}} </h1>
     {{newest_contribution}}
     <br>
     <br>
