@@ -118,6 +118,11 @@ donaldB -- 11-13-2022 13:57
 fixed the CSS cluttering, made it cleaner; also styled the card elements
 ==============================================================
 
+wilsonM -- 11-12-2022 21:04
+--------------------------------------------------------------
+added CSS for profile.html, add.html, and story.html
+==============================================================
+
 fristL -- TIMESTAMP
 --------------------------------------------------------------
 <Thing fristL did.>
