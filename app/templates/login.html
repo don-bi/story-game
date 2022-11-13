@@ -6,23 +6,23 @@
 </head>
 <body>
     <form>
-        <button class="home-button" formaction="/">home</button>
+        <button formaction="/">Home</button>
     </form>
-    <div class="login-container">
+    <div class="login container">
         <h1 class="login-header">Login</h1>
-        <form class="login-form" action="/profile" method="POST">
+        <form class="login form" action="/profile" method="POST">
             Username:
-            <input class="login-input" type="text" name="username" required>
+            <input type="text" name="username" required>
             Password:
-            <input class="login-input" type="password" name="password" required>
-            <input class="login-input" type="submit" name="login">
+            <input type="text" name="password" required>
+            <input type="submit" name="login">
             {% if error %}
             The wrong username or password was entered.
             {% endif %}
         </form>
-        <form class="signup-form-login">
+        <form class="signup">
             Don't have an account?
-            <button class="signup-login" formaction="/signup">Create an account</button>
+            <button id="signup-login" formaction="/signup">Create an account</button>
         </form>
     </div>
 </body>

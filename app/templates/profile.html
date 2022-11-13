@@ -14,8 +14,9 @@
         <h2>Created Stories</h2>
         <form action='/story' class="story-cards" method="POST">
             {% for story in created_stories %}
-            <button class= "button" type="submit" name="{{story[0]}}" class="card">
-                <div class="title">{{story[1]}} <div class="creator">{{story[2]}}</div></div>
+            <button type="submit" name="{{story[0]}}" class="card">
+                <div class="title">{{story[1]}}</div>
+                <div class="creator">By {{story[2]}}</div>
             </button>
             {% endfor %}
         </form>
@@ -24,8 +25,9 @@
         <h2>Contributed Stories</h2>
         <form action='/story' class="story-cards" method="POST">
             {% for story in contributed_stories %}
-            <button class= "button" type="submit" name="{{story[0]}}" class="card">
-                <div class="title">{{story[1]}} <div class="creator">{{story[2]}}</div></div>
+            <button type="submit" name="{{story[0]}}" class="card">
+                <div class="title">{{story[1]}}</div>
+                <div class="creator">By {{story[2]}}</div>
             </button>
             {% endfor %}
         </form>

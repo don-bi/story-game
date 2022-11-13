@@ -15,12 +15,12 @@
         <button formaction="/logout" method="POST">LOGOUT!</button>
         <br>
     </form>
+    <h2>Stories!</h2>
     <form action='/story' class="story-cards" method="POST">
         {% for story in stories %}
         <button type="submit" name="{{story[0]}}" class="card">
             <div class="title">{{story[1]}}</div>
-            <div class="creator">{{story[2]}}</div>
-            <br>
+            <div class="creator">By {{story[2]}}</div>
         </button>
         {% endfor %}
     </form>

@@ -6,20 +6,17 @@
 </head>
 <body>
     <form action="/">
-        <button>home</button>
+        <button>Home</button>
     </form>
-    <div class="signup-container">
+    <div class="signup container">
         <h1>Sign Up</h1>
         <div class="signup-text">Signing up for an account will allow you to create and edit stories!</div>
-        <form  class= "signup-form" action="/profile" method="POST">
+        <form  class= "signup form" action="/profile" method="POST">
             Username:
-            <input class="signup-input" type="text" name="username" required>
-            <br>
+            <input type="text" name="username" required>
             Password:
-            <input class="signup-input" type="password" name="password" required>
-            <br>
-            <input class="signup-input" type="submit" name="signup">
-            <br>
+            <input type="text" name="password" required>
+            <input type="submit" name="signup">
             {% if error %}
             The user already exists
             {% endif %}
