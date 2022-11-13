@@ -5,21 +5,21 @@ DB_FILE = "data.db"
 db = None
 
 def db_connect():
-    global db 
+    global db
     db = sqlite3.connect(DB_FILE)
     return db.cursor()
 
 def db_close():
     db.commit()
     db.close()
-    
+
 def db_table_inits(): #creates stories and user tables if they don't exist
     c = db_connect()
     c.execute("CREATE TABLE IF NOT EXISTS stories (id int, title text, creator text)")
     c.execute("CREATE TABLE IF NOT EXISTS story_info (id int, story_part int, story text, contributor text)")
     c.execute("CREATE TABLE IF NOT EXISTS users (username text, password text)")
     db_close()
-    
+
 #for signing up
 def check_user_not_exists(username): #checks if user doesn't exist, returns True if they don't exist
     c = db_connect()
@@ -52,7 +52,7 @@ def check_credentials(username, password): #checks if there exists username and 
     return False
 
 ''' Testing functions
- 
+
 db_table_inits()
 create_new_user("troll","troll123")
 c = db_connect()
@@ -108,7 +108,7 @@ def get_story_info(story_id): #gets list of each part of a story(tuple)
     db_close()
     return story_info
 
-def get_contributor_list(story_id): #gets list of contributors(tuples) 
+def get_contributor_list(story_id): #gets list of contributors(tuples)
     c = db_connect()
     c.execute('SELECT contributor FROM story_info WHERE id=?',story_id)
     contributor_list = c.fetchall()
@@ -122,7 +122,7 @@ def get_created_stories(username): #returns the stories that a user has created 
     db_close()
     print(f'created_stories:{created_stories}')
     return created_stories
-    
+
 def get_contributed_stories(username): #returns the stories a user has contributed to (for profile)
     c = db_connect()
     c.execute('SELECT id FROM story_info WHERE contributor=?',(username,))
@@ -136,5 +136,10 @@ def get_contributed_stories(username): #returns the stories a user has contribut
     db_close()
     print(f'contributed_stories:{contributed_stories}') #testing
     return contributed_stories
-        
-        
+
+def get_story_title(story_id): #gets list of each part of a story(tuple)
+    c = db_connect()
+    c.execute('SELECT title FROM stories WHERE id=?',story_id)
+    story_title = c.fetchone()
+    db_close()
+    return story_title

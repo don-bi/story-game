@@ -74,6 +74,7 @@ def profile():
 @app.route('/story', methods=["POST"])
 def story():
     story_id = list(request.form)[0][0] #gets id from name="{{story[0]}}", turns into list becuase request.form is dictonary
+    story_title = get_story_title(story_id)
     if len(request.form) > 1: #request.form will only have more than one element when contribution request
         story_id = list(request.form)[-1][0]
         contribution = request.form['contribution']
@@ -83,7 +84,7 @@ def story():
     contributor_list = get_contributor_list(story_id)
     newest_contribution = story_info[-1][2]
     #print(newest_contribution) #testing
-    return render_template('story.html', story_id = story_id,
+    return render_template('story.html', story_id = story_id, story_title = story_title,
     story_info = story_info, contributor_list = contributor_list,
     username = session['username'], newest_contribution = newest_contribution)
 
