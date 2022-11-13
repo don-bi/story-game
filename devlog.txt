@@ -113,6 +113,11 @@ wilsonM -- 11-12-2022 21:04
 wrote the CSS for index.html and edited profile.html
 ==============================================================
 
+donaldB -- 11-13-2022 13:57
+--------------------------------------------------------------
+fixed the CSS cluttering, made it cleaner; also styled the card elements
+==============================================================
+
 fristL -- TIMESTAMP
 --------------------------------------------------------------
 <Thing fristL did.>
