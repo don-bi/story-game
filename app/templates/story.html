@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Story</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+  <title>Story</title>
+  <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-    <form>
-        <button formaction="/">discover</button>
-        <button formaction="/profile">profile</button>
-    </form>
-    {% if (username,) in contributor_list %} <!-- contributor_list is a list of tuples, makes username into a tuple first to check if user contributed already or not -->
-        <div class="story">
-        {% for info in story_info %}
-        <span>
-            {{info[2]}}
-        </span> <!-- makes span tags for every contribution -->
-        {% endfor %}    
-        </div>
-        <div class="creator">Created by {{story_info[0][3]}}</div> <!-- gets username of creator -->
-        
-    {% else %}
-        <!-- if user is not a contributor, only shows the last contribution of the story -->
-        <div class="story">{{newest_contribution}}</div>
-        <div class="creator">Created by {{story_info[0][3]}}</div>
-        <form action="/story" method="POST">
-            <input type="text" name="contribution">
-            <input type="submit" name="{{story_id}}" value="Submit Contribution">
-        </form> 
-    {% endif %}
-    
-    <!--
-    {{story_info}}
-    {{contributor_list}}
-    -->
+  <form>
+    <button class = "button" formaction="/">discover</button>
+    <button class = "button" formaction="/profile">profile</button>
+  </form>
+  {% if (username,) in contributor_list %} <!-- contributor_list is a list of tuples, makes username into a tuple first to check if user contributed already or not -->
+  <div class="story-story">
+    <h1> Story: </h1>
+    {% for info in story_info %}
+    <span>
+      {{info[2]}}
+    </span> <!-- makes span tags for every contribution -->
+    {% endfor %}
+
+    <br>
+    <br>
+
+    <div class="story-creator">Created by {{story_info[0][3]}}</div>
+  </div>
+  <!-- <div class="creator">Created by {{story_info[0][3]}}</div>  -->
+  <!-- gets username of creator -->
+
+  {% else %}
+  <!-- if user is not a contributor, only shows the last contribution of the story -->
+  <div class="story-story">
+    <h1> Story: </h1>
+    {{newest_contribution}}
+    <br>
+    <br>
+
+    <div class="story-creator">Created by {{story_info[0][3]}}</div>
+  </div>
+
+  <div class="story-adding">
+  <h3> Add to the story: </h3>
+  <form action="/story" method="POST">
+    <input type="text" name="contribution">
+    <input class="button-small" type="submit" name="{{story_id}}" value="Submit Contribution">
+  </form>
+</div>
+  {% endif %}
+
+  <!--
+  {{story_info}}
+  {{contributor_list}}
+-->
 </body>
 </html>
