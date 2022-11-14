@@ -16,7 +16,7 @@
             Password:
             <input type="password" name="password" required>
             <input type="submit" name="login">
-            {% if error %}
+            {% if error == 'login' %}
             The wrong username or password was entered.
             {% endif %}
         </form>

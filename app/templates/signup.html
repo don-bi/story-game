@@ -16,9 +16,13 @@
             <input type="text" name="username" required>
             Password:
             <input type="password" name="password" required>
+            Confirm Password:
+            <input type="password" name="confirmation" required>
             <input type="submit" name="signup">
-            {% if error %}
+            {% if error == 'signup' %}
             The user already exists
+            {% elif error == 'confirmation' %}
+            Your password was not the same as the confirmation
             {% endif %}
         </form>
     </div>
