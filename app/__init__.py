@@ -53,16 +53,21 @@ def profile():
             if correct_credentials:
                 session['username'] = username
             else:
-                return render_template('login.html', error = True)
+                return render_template('login.html', error = 'login')
 
         elif 'signup' in request.form: #for signups
             db_table_inits() #makes tables if they don't exist
             no_user_exists = check_user_not_exists(username)
             if no_user_exists: #signs up and logs in the user
-                create_new_user(username, password)
-                session['username'] = username
-            else: #error because user already exists
-                return render_template('signup.html', error = True)
+                if password == request.form['confirmation']:
+                    create_new_user(username, password)
+                    session['username'] = username
+                else:
+                    #error because confirmation not same as password
+                    return render_template('signup.html', error = 'confirmation')
+            else:
+                #error because user already exists
+                return render_template('signup.html', error = 'signup')
 
     username = session['username']
     created_stories = get_created_stories(username)
