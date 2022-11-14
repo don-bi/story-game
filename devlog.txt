@@ -123,7 +123,7 @@ wilsonM -- 11-13-2022 14:54
 added CSS for profile.html, add.html, story.html, and discover.html
 ==============================================================
 
-fristL -- TIMESTAMP
+nakibA -- 11-13-2022 21:12
 --------------------------------------------------------------
-<Thing fristL did.>
+add hidden password feature; added reqs to requirements.txt; added .gitignore
 ==============================================================
