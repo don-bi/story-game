@@ -1,10 +1,10 @@
 from flask import Flask,render_template,session,request
-import secrets
+import os
 from db import *
 
 app = Flask(__name__)
 
-app.secret_key = secrets.token_bytes(32)
+app.secret_key = os.urandom(32)
 
 @app.route('/')
 def home():
