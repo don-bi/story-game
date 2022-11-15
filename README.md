@@ -7,7 +7,7 @@ Roster:
 
 Description of Website: 
 - Our website is a story game where users can add on to an existing story thread or create a new story themselves
-- Users need to be logged in to view/edit/add stories. If a user doesn't have an accounter, the user can navigate to the signup page to create an account
+- Users need to be logged in to view/edit/add stories. If a user doesn't have an account, the user can navigate to the signup page to create an account
 - The profile page shows all the stories the user created and the stories the user contributed to
 - The discover page allows user to view/edit existing stories and has a link to the add page where the user can create their own story
 
