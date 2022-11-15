@@ -142,3 +142,8 @@ nakibA -- 11-14-2022 22:25
 --------------------------------------------------------------
 Updated README.md, added revised wiki design doc. For our design doc, we needed a flowchart for our sitemap and we realized that instead of having a different webpage for each student wiki, it would be a lot more effective to have all of the content in one webpage with links to the bookmark for each student wiki for ease of navigation. 
 ==============================================================
+
+donaldB -- 11-14-2022 22:56
+--------------------------------------------------------------
+fixed bug where title of the story is not showing after you contribute for the first time
+==============================================================
